@@ -2,7 +2,7 @@
 
 ## 1. 🚀 Estrutura e PWA
 
-Definir estrutura de pastas e arquivos* [x] 
+* [x] Definir estrutura de pastas e arquivos
 * [ ] Configurar layout mobile-first
 * [ ] Configurar PWA
 * [ ] Configurar manifest
