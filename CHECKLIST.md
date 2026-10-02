@@ -8,8 +8,7 @@
 * [x] Configurar manifest
 * [x] Criar ícones
 * [x] Configurar Service Worker
-* [ ] Permitir instalação do aplicativo
-* [ ] Configurar acesso à câmera
+* [x] Configurar acesso à câmera
 * [ ] Configurar seleção de fotos da galeria
 * [ ] Testar câmera e seleção de fotos
 * [ ] **Teste da estrutura, PWA e recursos de imagem**
