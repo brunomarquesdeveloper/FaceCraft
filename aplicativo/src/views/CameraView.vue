@@ -1,9 +1,20 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { requestCamera } from '../services/camera/camera'
+import { selectPhoto } from '../services/camera/gallery'
 
 const video = ref<HTMLVideoElement | null>(null)
 const error = ref('')
+
+const selectedPhoto = ref<string | null>(null)
+
+async function handleSelectPhoto() {
+  const file = await selectPhoto()
+
+  if (!file) return
+
+  selectedPhoto.value = URL.createObjectURL(file)
+}
 
 let stream: MediaStream | null = null
 
@@ -22,6 +33,10 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   stream?.getTracks().forEach(track => track.stop())
+
+  if (selectedPhoto.value) {
+    URL.revokeObjectURL(selectedPhoto.value)
+  }
 })
 </script>
 
@@ -34,6 +49,16 @@ onBeforeUnmount(() => {
       autoplay
       playsinline
       muted
+    />
+
+    <button type="button" @click="handleSelectPhoto">
+      Selecionar foto da galeria
+    </button>
+
+    <img
+      v-if="selectedPhoto"
+      :src="selectedPhoto"
+      alt="Foto selecionada"
     />
 
     <p v-if="error">

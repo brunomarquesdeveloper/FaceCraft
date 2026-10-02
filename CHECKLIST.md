@@ -9,9 +9,9 @@
 * [x] Criar ícones
 * [x] Configurar Service Worker
 * [x] Configurar acesso à câmera
-* [ ] Configurar seleção de fotos da galeria
-* [ ] Testar câmera e seleção de fotos
-* [ ] **Teste da estrutura, PWA e recursos de imagem**
+* [x] Configurar seleção de fotos da galeria
+* [x] Testar câmera e seleção de fotos
+* [x] **Teste da estrutura, PWA e recursos de imagem**
 
 ---
 
