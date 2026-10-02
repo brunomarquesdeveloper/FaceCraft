@@ -7,7 +7,7 @@
 * [x] Configurar PWA
 * [x] Configurar manifest
 * [x] Criar ícones
-* [ ] Configurar Service Worker
+* [x] Configurar Service Worker
 * [ ] Permitir instalação do aplicativo
 * [ ] Configurar acesso à câmera
 * [ ] Configurar seleção de fotos da galeria
