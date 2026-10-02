@@ -5,7 +5,7 @@
 * [x] Definir estrutura de pastas e arquivos
 * [x] Configurar layout mobile-first
 * [x] Configurar PWA
-* [ ] Configurar manifest
+* [x] Configurar manifest
 * [ ] Criar ícones
 * [ ] Configurar Service Worker
 * [ ] Permitir instalação do aplicativo

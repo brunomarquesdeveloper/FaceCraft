@@ -1,0 +1,12 @@
+{
+  "name": "FaceCraft",
+  "short_name": "FaceCraft",
+  "description": "Crie personagens inspirados nas suas características faciais.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0f1115",
+  "background_color": "#0f1115",
+  "lang": "pt-BR"
+}
