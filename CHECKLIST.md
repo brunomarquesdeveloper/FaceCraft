@@ -6,7 +6,7 @@
 * [x] Configurar layout mobile-first
 * [x] Configurar PWA
 * [x] Configurar manifest
-* [ ] Criar ícones
+* [x] Criar ícones
 * [ ] Configurar Service Worker
 * [ ] Permitir instalação do aplicativo
 * [ ] Configurar acesso à câmera
