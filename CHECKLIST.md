@@ -26,11 +26,10 @@
 - [x] Testar navegação inferior
 
 ### 🏠 Início
-- [ ] Definir layout da tela inicial
-- [ ] Definir informações exibidas
-- [ ] Definir ações principais
-- [ ] Definir acesso ao fluxo de análise facial
-- [ ] Testar tela inicial
+- [x] Definir layout da tela inicial
+- [x] Definir informações exibidas
+- [x] Definir ações principais
+- [x] Testar tela inicial
 
 ### 🎮 Jogos
 - [ ] Criar tela de Jogos
