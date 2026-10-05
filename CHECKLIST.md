@@ -31,6 +31,7 @@
 - [x] Definir informações exibidas
 - [x] Definir ações principais
 - [x] Testar tela inicial
+- [x] Melhorar selecao de telas no bottom-nav
 
 ### 🎮 Jogos
 - [ ] Criar tela de Jogos

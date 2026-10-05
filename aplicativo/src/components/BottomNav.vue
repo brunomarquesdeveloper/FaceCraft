@@ -1,65 +1,79 @@
-<script setup lang="ts">
-import { RouterLink } from 'vue-router'
-import {
-  House,
-  Gamepad2,
-  Settings
-} from 'lucide-vue-next'
-</script>
-
 <template>
   <nav class="bottom-nav">
     <div class="bottom-nav-content">
 
       <RouterLink
-        to="/"
+        v-for="item in items"
+        :key="item.path"
+        :to="item.path"
         class="bottom-nav-item"
+        :class="{ active: isActive(item.path) }"
       >
-        <House :size="22" />
-        <span>Início</span>
-      </RouterLink>
+        <component :is="item.icon" :size="22" />
 
-      <RouterLink
-        to="/jogos"
-        class="bottom-nav-item"
-      >
-        <Gamepad2 :size="22" />
-        <span>Jogos</span>
-      </RouterLink>
-
-      <RouterLink
-        to="/configuracoes"
-        class="bottom-nav-item"
-      >
-        <Settings :size="22" />
-        <span>Config.</span>
+        <span>{{ item.label }}</span>
       </RouterLink>
 
     </div>
   </nav>
 </template>
 
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import {
+  House,
+  Gamepad2,
+  Settings
+} from 'lucide-vue-next'
+
+const route = useRoute()
+
+const items = [
+  {
+    label: 'Início',
+    icon: House,
+    path: '/'
+  },
+  {
+    label: 'Jogos',
+    icon: Gamepad2,
+    path: '/jogos'
+  },
+  {
+    label: 'Config.',
+    icon: Settings,
+    path: '/configuracoes'
+  }
+]
+
+const currentPath = computed(() => route.path)
+
+function isActive(path: string) {
+  return currentPath.value === path
+}
+</script>
+
 <style scoped>
 .bottom-nav {
   position: fixed;
-  bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  bottom: 0;
+  z-index: 100;
 
-  background: var(--bs-body-bg);
-  border-top: 1px solid var(--bs-border-color);
-
-  padding-bottom: env(safe-area-inset-bottom);
+  background: #0f1115;
+  border-top: 1px solid #24272d;
 }
 
 .bottom-nav-content {
   width: 100%;
-  max-width: 600px;
+  max-width: 480px;
+  height: 68px;
   margin: 0 auto;
 
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-around;
 }
 
@@ -70,22 +84,32 @@ import {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   gap: 4px;
 
-  padding: 10px 8px;
-
-  color: var(--bs-secondary-color);
+  color: #777;
   text-decoration: none;
 
-  font-size: 0.75rem;
-}
+  font-size: 12px;
+  font-weight: 500;
 
-.bottom-nav-item.router-link-active {
-  color: var(--bs-primary);
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
 .bottom-nav-item:hover {
-  color: var(--bs-primary);
+  color: #aaa;
+}
+
+.bottom-nav-item.active {
+  color: #42b883;
+}
+
+.bottom-nav-item.active svg {
+  stroke-width: 2.5;
+}
+
+.bottom-nav-item span {
+  line-height: 1;
 }
 </style>

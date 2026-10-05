@@ -99,7 +99,7 @@ import { computed, onBeforeUnmount, ref } from 'vue'
 
 import ImageModal from '../components/ImageModal.vue'
 
-import '../layouts/home.css'
+import '../assets/styles/home.css'
 
 const showImageModal = ref(false)
 
