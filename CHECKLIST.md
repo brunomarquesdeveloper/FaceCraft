@@ -24,6 +24,7 @@
 - [x] Criar navegação para Configurações
 - [x] Definir estado ativo da navegação
 - [x] Testar navegação inferior
+- [x] criar header
 
 ### 🏠 Início
 - [x] Definir layout da tela inicial
