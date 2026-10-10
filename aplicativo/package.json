@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2",
+    "@vladmandic/face-api": "^1.7.15",
     "bootstrap": "^5.3.8",
+    "face-api.js": "^0.22.2",
     "lucide-vue-next": "^1.0.0",
     "pinia": "^4.0.3",
     "vue": "^3.5.43",
