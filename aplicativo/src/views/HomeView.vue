@@ -1,108 +1,68 @@
 <template>
   <main class="home-page">
+    <section class="home-card">
+      <form class="home-form" @submit.prevent="processImage">
+        <!-- Foto do rosto -->
+        <section class="image-section">
+          <h1 class="section-label">Adicione uma foto do rosto</h1>
 
-    <!-- Área da imagem -->
-    <section class="image-section">
-      <p class="section-label">Adicione uma foto</p>
+          <button type="button" class="image-box" aria-label="Adicionar ou alterar foto do rosto"
+            @click="openImageModal">
+            <img v-if="selectedPhoto" :src="selectedPhoto" alt="Foto do rosto selecionada" />
 
-      <button
-        type="button"
-        class="image-box"
-        @click="openImageModal"
-      >
-        <img
-          v-if="selectedPhoto"
-          :src="selectedPhoto"
-          alt="Imagem selecionada"
-        />
+            <span v-else class="add-image" aria-hidden="true">+</span>
+          </button>
 
-        <span v-else class="add-image">
-          +
-        </span>
-      </button>
+          <div v-if="selectedPhoto" class="image-actions">
+            <button type="button" class="secondary-button" @click="openImageModal">
+              Mudar imagem
+            </button>
 
-      <div v-if="selectedPhoto" class="image-actions">
-        <button
-          type="button"
-          @click="openImageModal"
-        >
-          Mudar imagem
+            <button type="button" class="danger-button" @click="removePhoto">
+              Excluir
+            </button>
+          </div>
+        </section>
+
+        <!-- Escolha do jogo -->
+        <section class="game-section">
+          <label for="game-search" class="section-label">
+            Escolha um jogo
+          </label>
+
+          <input id="game-search" v-model="search" type="search" placeholder="Pesquisar jogo..." autocomplete="off"
+            @focus="showGameResults = true" @keydown.esc="showGameResults = false" />
+
+          <div v-if="showGameResults && search.trim() && filteredGames.length" class="game-results">
+            <button v-for="game in filteredGames" :key="game" type="button" :class="{ selected: selectedGame === game }"
+              @click="selectGame(game)">
+              {{ game }}
+            </button>
+          </div>
+
+          <p v-if="showGameResults && search.trim() && !filteredGames.length" class="no-results">
+            Nenhum jogo encontrado.
+          </p>
+        </section>
+
+        <!-- Processamento -->
+        <button type="submit" class="process-button" :disabled="!selectedPhoto || !selectedGame">
+          Processar imagem
         </button>
-
-        <button
-          type="button"
-          class="danger-button"
-          @click="removePhoto"
-        >
-          Excluir
-        </button>
-      </div>
+      </form>
     </section>
 
-    <!-- Pesquisa do jogo -->
-<section class="game-section">
-  <p class="section-label">Escolha um jogo</p>
-
-  <input
-    id="game-search"
-    v-model="search"
-    type="search"
-    placeholder="🔍 Pesquisar jogo"
-    autocomplete="off"
-    @focus="showGameResults = true"
-  />
-
-  <div
-    v-if="showGameResults && search.trim() && filteredGames.length"
-    class="game-results"
-  >
-    <button
-      v-for="game in filteredGames"
-      :key="game"
-      type="button"
-      :class="{ selected: selectedGame === game }"
-      @click="selectGame(game)"
-    >
-      {{ game }}
-    </button>
-  </div>
-
-  <p
-    v-if="search.trim() && !filteredGames.length"
-    class="no-results"
-  >
-    Nenhum jogo encontrado.
-  </p>
-</section>
-
-    <!-- Processar -->
-    <button
-      type="button"
-      class="process-button"
-      :disabled="!selectedPhoto || !selectedGame"
-      @click="processImage"
-    >
-      Processar imagem
-    </button>
-
-    <!-- Modal -->
-    <ImageModal
-      v-if="showImageModal"
-      @close="closeImageModal"
-      @image-selected="handleImageSelected"
-    />
-
+    <ImageModal v-if="showImageModal" @close="closeImageModal" @image-selected="handleImageSelected" />
   </main>
 </template>
+
+
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from 'vue'
-
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import ImageModal from '../components/ImageModal.vue'
-
 import '../assets/styles/home.css'
 
 const showImageModal = ref(false)
-
 const selectedPhoto = ref<string | null>(null)
 
 const search = ref('')
@@ -121,18 +81,22 @@ const games = [
 const filteredGames = computed(() => {
   const value = search.value.trim().toLowerCase()
 
-  if (!value) {
-    return []
-  }
+  if (!value) return []
 
   return games.filter(game =>
     game.toLowerCase().includes(value)
   )
 })
 
-function openImageModal() {
-  console.log('abriu modal')
+// Se o usuário editar a pesquisa manualmente,
+// o jogo anterior deixa de ser considerado selecionado.
+watch(search, (value) => {
+  if (selectedGame.value && value !== selectedGame.value) {
+    selectedGame.value = null
+  }
+})
 
+function openImageModal() {
   showImageModal.value = true
 }
 
@@ -141,29 +105,27 @@ function closeImageModal() {
 }
 
 function handleImageSelected(file: File) {
-  console.log('📸 IMAGEM CHEGOU NO HOME:', file)
+  if (!(file instanceof File)) return
+  if (!file.type.startsWith('image/')) return
 
   setPhoto(file)
-  
-  console.log('🖼️ URL DA IMAGEM:', selectedPhoto.value)
-
   closeImageModal()
 }
 
 function setPhoto(file: File) {
-  if (selectedPhoto.value) {
-    URL.revokeObjectURL(selectedPhoto.value)
-  }
-
+  releasePhotoUrl()
   selectedPhoto.value = URL.createObjectURL(file)
 }
 
-function removePhoto() {
+function releasePhotoUrl() {
   if (selectedPhoto.value) {
     URL.revokeObjectURL(selectedPhoto.value)
+    selectedPhoto.value = null
   }
+}
 
-  selectedPhoto.value = null
+function removePhoto() {
+  releasePhotoUrl()
 }
 
 function selectGame(game: string) {
@@ -172,14 +134,24 @@ function selectGame(game: string) {
   showGameResults.value = false
 }
 
+function clearSelectedGame() {
+  selectedGame.value = null
+  search.value = ''
+  showGameResults.value = true
+}
 
 function processImage() {
-  console.log('processando imagem')
+  if (!selectedPhoto.value || !selectedGame.value) return
+
+  console.log('FaceCraft: iniciar processamento', {
+    game: selectedGame.value,
+    photo: selectedPhoto.value
+  })
+
+  // Próxima etapa: integrar com o serviço de análise facial.
 }
 
 onBeforeUnmount(() => {
-  if (selectedPhoto.value) {
-    URL.revokeObjectURL(selectedPhoto.value)
-  }
+  releasePhotoUrl()
 })
 </script>

@@ -1,207 +1,245 @@
 .home-page {
   width: 100%;
-  max-width: 480px;
-  height: calc(100vh - 64px);
-  margin: 0 auto;
-  padding: 32px 20px;
+  min-height: calc(100vh - 64px);
+  min-height: calc(100dvh - 64px);
   box-sizing: border-box;
+  padding: 20px 16px;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  align-items: flex-start;
+  justify-content: center;
 
-  overflow: hidden;
+  background: var(--fc-bg, #0f1115);
+  color: var(--fc-text, #f4f5f7);
 }
 
-/* =========================
-   Imagem
-   ========================= */
+.home-card {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 0;
+  padding: 24px 20px;
+
+  border: 1px solid var(--fc-border, #303541);
+  border-radius: 20px;
+
+  background: var(--fc-surface, #181b22);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
+}
+
+.home-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 
 .image-section {
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .section-label {
   width: 100%;
-  margin: 0 0 8px;
+  margin: 0;
 
-  color: #ddd;
+  color: var(--fc-text, #f4f5f7);
   font-size: 15px;
   font-weight: 600;
+  text-align: left;
+}
+
+.image-section .section-label {
+  text-align: center;
+  font-size: 17px;
 }
 
 .image-box {
-  width: min(100%, 320px);
+  width: min(100%, 280px);
   aspect-ratio: 1 / 1;
-
   padding: 0;
-
-  border: 2px dashed #555;
-  border-radius: 18px;
-
   overflow: hidden;
-
-  background: #181b20;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  border: 2px dashed var(--fc-border, #454a56);
+  border-radius: 16px;
+
+  background: var(--fc-bg, #0f1115);
   cursor: pointer;
+
+  transition: border-color 180ms ease;
+}
+
+.image-box:hover,
+.image-box:focus-visible {
+  border-color: var(--fc-primary, #42b883);
 }
 
 .image-box img {
+  display: block;
   width: 100%;
   height: 100%;
-
   object-fit: cover;
 }
 
 .add-image {
+  color: var(--fc-text-muted, #888);
   font-size: 64px;
   font-weight: 300;
   line-height: 1;
-
-  color: #888;
 }
 
-/* =========================
-   Ações da imagem
-   ========================= */
-
 .image-actions {
+  width: 100%;
   display: flex;
-  gap: 10px;
   justify-content: center;
+  gap: 10px;
 }
 
 .image-actions button {
-  border: 0;
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--fc-border, #454a56);
   border-radius: 10px;
-
-  padding: 10px 16px;
-
   cursor: pointer;
 }
 
-.danger-button {
-  color: #fff;
-  background: #a83232;
+.secondary-button {
+  background: var(--fc-surface-hover, #222631);
+  color: var(--fc-text, #f4f5f7);
 }
 
-/* =========================
-   Pesquisa
-   ========================= */
+.danger-button {
+  background: var(--fc-danger, #a83232);
+  border-color: var(--fc-danger, #a83232) !important;
+  color: #fff;
+}
 
 .game-section {
   width: 100%;
   position: relative;
 }
 
+.game-section .section-label {
+  margin-bottom: 10px;
+}
+
 .game-section input {
   width: 100%;
+  min-height: 48px;
   box-sizing: border-box;
+  padding: 12px 14px;
 
-  padding: 14px 16px;
-
-  border: 1px solid #444;
+  border: 1px solid var(--fc-border, #454a56);
   border-radius: 12px;
 
-  background: #181b20;
-  color: #fff;
-
-  outline: none;
+  background: var(--fc-input-bg, #14171d);
+  color: var(--fc-text, #f4f5f7);
 
   font-size: 15px;
+  outline: none;
+}
+
+.game-section input::placeholder {
+  color: var(--fc-text-muted, #9298a6);
 }
 
 .game-section input:focus {
-  border-color: #42b883;
+  border-color: var(--fc-primary, #42b883);
 }
-
-/* =========================
-   Resultados
-   ========================= */
 
 .game-results {
   position: absolute;
-
   z-index: 10;
-
   top: calc(100% + 6px);
   left: 0;
   right: 0;
 
-  max-height: 220px;
-
+  max-height: 200px;
   overflow-y: auto;
-
   padding: 6px;
 
+  border: 1px solid var(--fc-border, #303541);
   border-radius: 12px;
-  border: 1px solid #333;
 
-  background: #181b20;
+  background: var(--fc-surface, #181b22);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 20%);
 }
 
 .game-results button {
+  display: block;
   width: 100%;
-
   padding: 12px;
 
   border: 0;
   border-radius: 8px;
 
   background: transparent;
-  color: #ddd;
-
+  color: var(--fc-text, #f4f5f7);
   text-align: left;
-
   cursor: pointer;
 }
 
 .game-results button:hover,
 .game-results button.selected {
-  background: #242a2f;
+  background: var(--fc-surface-hover, #242a2f);
 }
 
 .no-results {
-  margin: 8px 4px;
-
-  color: #888;
-
+  margin: 10px 2px 0;
+  color: var(--fc-text-muted, #9298a6);
   font-size: 14px;
 }
 
-/* =========================
-   Processar
-   ========================= */
-
 .process-button {
   width: 100%;
-  max-width: 320px;
-
-  padding: 14px;
+  min-height: 48px;
+  padding: 13px 16px;
 
   border: 0;
   border-radius: 12px;
 
-  background: #42b883;
+  background: var(--fc-primary, #42b883);
   color: #fff;
 
   font-size: 15px;
   font-weight: 600;
-
   cursor: pointer;
 }
 
 .process-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+@media (max-width: 360px) {
+  .home-card {
+    padding: 20px 16px;
+  }
+
+  .image-box {
+    width: min(100%, 240px);
+  }
+}
+
+@media (max-height: 650px) {
+  .home-page {
+    align-items: flex-start;
+  }
+
+  .home-card {
+    margin-block: auto;
+  }
+
+  .home-form {
+    gap: 18px;
+  }
+
+  .image-box {
+    width: min(100%, 200px);
+  }
 }
