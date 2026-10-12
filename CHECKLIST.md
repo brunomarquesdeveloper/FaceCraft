@@ -75,13 +75,14 @@ Aplicativo web progressivo (PWA), com foco em dispositivos móveis, que analisa 
 
 #### 🎨 Personalização
 
-- [ ] Criar tela de Configurações
+- [x] Criar tela de Configurações
 - [ ] Criar seção Personalização
-- [ ] Implementar configuração de tema
+- [ ] Implementar configuração de tema (Escuro, Claro e Sistema)
 - [ ] Implementar configuração de idioma
 - [ ] Implementar configuração de notificações, se aplicável
-- [ ] Persistir preferências do usuário
-- [ ] Testar configurações
+- [ ] Persistir preferências do usuário no armazenamento local
+- [ ] Aplicar tema globalmente em todas as telas e componentes
+- [ ] Testar configurações e persistência após reiniciar o aplicativo
 
 #### 💾 Dados e privacidade
 
