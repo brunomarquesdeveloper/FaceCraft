@@ -56,14 +56,15 @@ Aplicativo web progressivo (PWA), com foco em dispositivos móveis, que analisa 
 
 ### 🎮 Jogos
 
+- [x] Criar estrutura inicial da tela de Jogos
+- [x] Criar pesquisa de jogos por nome
+- [x] Definir informações exibidas para cada personalização salva
+- [x] Definir comportamento quando não houver resultados
 - [ ] Finalizar tela de Jogos
 - [ ] Criar lista de jogos disponíveis
-- [ ] Criar pesquisa de jogos
-- [ ] Definir informações exibidas para cada jogo
 - [ ] Criar modal de informações do jogo
 - [ ] Exibir tutoriais disponíveis no modal
 - [ ] Criar acesso ao tutorial
-- [ ] Definir comportamento quando não houver resultados
 - [ ] Integrar lista de jogos ao Supabase
 - [ ] Implementar carregamento da configuração do jogo selecionado
 - [ ] Testar pesquisa e seleção de jogos
