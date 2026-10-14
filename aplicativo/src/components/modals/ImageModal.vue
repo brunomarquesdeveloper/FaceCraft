@@ -84,8 +84,8 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue'
-import { requestCamera } from '../services/camera/camera'
-import { selectPhoto } from '../services/camera/gallery'
+import { requestCamera } from '../../services/camera/camera'
+import { selectPhoto } from '../../services/camera/gallery'
 
 const emit = defineEmits<{
   close: []
