@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.faceRoutes = void 0;
+const faceProfile_service_1 = require("../services/face/faceProfile.service");
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = [
     'image/jpeg',
@@ -72,7 +73,11 @@ const faceRoutes = async (app) => {
                         : 'Não foi possível analisar a imagem.',
                 });
             }
-            return reply.send(result);
+            const profile = (0, faceProfile_service_1.createFaceProfile)(result);
+            return reply.send({
+                ...result,
+                profile,
+            });
         }
         catch (error) {
             request.log.error({ err: error }, 'Falha ao comunicar com o motor facial.');

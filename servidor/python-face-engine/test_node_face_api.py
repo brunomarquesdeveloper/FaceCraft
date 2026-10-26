@@ -1,3 +1,4 @@
+
 import json
 import urllib.request
 
@@ -23,7 +24,7 @@ if not content_type.lower().startswith("image/jpeg"):
 if not image_bytes or len(image_bytes) > 10 * 1024 * 1024:
     raise RuntimeError("Imagem vazia ou acima de 10 MB")
 
-print(f"2. Enviando {len(image_bytes)} bytes ao motor facial...")
+print(f"2. Enviando {len(image_bytes)} bytes à API Node.js...")
 
 api_request = urllib.request.Request(
     "http://127.0.0.1:3000/api/face/analyze",
@@ -35,10 +36,44 @@ api_request = urllib.request.Request(
 with urllib.request.urlopen(api_request, timeout=60) as response:
     result = json.loads(response.read())
 
-print("\n3. Resultado:")
+print("\n3. Resultado da análise:")
 print("Motor:", result.get("engine"))
 print("Rostos:", result.get("faceCount"))
 print("Pontos faciais:", len(result.get("landmarks", [])))
 print("Categorias de expressão:", len(result.get("blendshapes", [])))
 print("Matriz disponível:", bool(result.get("transformationMatrix")))
 print("Tempo de análise (ms):", result.get("processingMs"))
+
+print("\n4. Perfil facial calculado pela API Node.js:")
+profile = result.get("profile")
+
+if not isinstance(profile, dict):
+    raise RuntimeError(
+        "O perfil facial não foi encontrado. "
+        "Confira a integração em src/routes/face.routes.ts."
+    )
+
+measurements = profile.get("measurements", {})
+quality = profile.get("quality", {})
+
+print("Versão do perfil:", profile.get("schemaVersion"))
+print("Versão do modelo:", profile.get("modelVersion"))
+print("Quantidade de medidas:", len(measurements))
+print("Estado da qualidade:", quality.get("status"))
+
+for name, measurement in measurements.items():
+    if isinstance(measurement, dict):
+        value = measurement.get("value")
+        available = measurement.get("available")
+        print(f"- {name}: {value} (disponível: {available})")
+
+print("\nAvisos:")
+for warning in quality.get("warnings", []):
+    print(f"- {warning}")
+
+if len(measurements) != 10:
+    raise RuntimeError(
+        f"Esperadas 10 medidas; recebidas {len(measurements)}."
+    )
+
+print("\nSUCESSO: a API retornou o perfil facial com 10 medidas.")

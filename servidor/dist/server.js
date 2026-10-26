@@ -7,6 +7,7 @@ require("dotenv/config");
 const fastify_1 = __importDefault(require("fastify"));
 const cors_1 = __importDefault(require("@fastify/cors"));
 const games_routes_1 = require("./routes/games.routes");
+const face_routes_1 = require("./routes/face.routes");
 const app = (0, fastify_1.default)({
     logger: true,
 });
@@ -19,6 +20,7 @@ async function start() {
         service: 'FaceCraft API',
     }));
     await app.register(games_routes_1.gamesRoutes);
+    await app.register(face_routes_1.faceRoutes);
     try {
         await app.listen({
             port: Number(process.env.PORT ?? 3000),
