@@ -2,6 +2,7 @@ import 'dotenv/config'
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import { gamesRoutes } from './routes/games.routes'
+import { faceRoutes } from './routes/face.routes'
 
 const app = Fastify({
   logger: true,
@@ -18,6 +19,7 @@ async function start() {
   }))
 
   await app.register(gamesRoutes)
+  await app.register(faceRoutes)
 
   try {
     await app.listen({
