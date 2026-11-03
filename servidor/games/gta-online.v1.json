@@ -1,0 +1,300 @@
+{
+  "schema_version": "1.0.0",
+  "game": {
+    "id": "gtav",
+    "name": "GTA Online",
+    "creator": "gta_online",
+    "catalog_version": 1
+  },
+  "scope": {
+    "category": "facial_customization",
+    "automatic_mapping": true,
+    "requires_calibration": true
+  },
+  "coordinate_system": {
+    "type": "facecraft_normalized",
+    "minimum": -1.0,
+    "maximum": 1.0,
+    "note": "Valores internos do FaceCraft, não escalas oficiais do jogo."
+  },
+  "features": [
+    {
+      "id": "brow",
+      "name": "Sobrancelhas",
+      "game_control": "Brow",
+      "presets": ["standard", "protruding", "shallow"],
+      "axes": [
+        {
+          "id": "vertical",
+          "negative": "down",
+          "positive": "up"
+        },
+        {
+          "id": "horizontal",
+          "negative": "in",
+          "positive": "out"
+        }
+      ],
+      "source_measurements": [
+        "eyebrows.distance_px"
+      ],
+      "mapping_status": "needs_measurement",
+      "calibration_required": true
+    },
+    {
+      "id": "eyes",
+      "name": "Olhos",
+      "game_control": "Eyes",
+      "presets": ["standard", "wide", "squint"],
+      "axes": [
+        {
+          "id": "shape",
+          "negative": "squint",
+          "positive": "wide"
+        }
+      ],
+      "source_measurements": [
+        "eyes.left.width_face_ratio",
+        "eyes.right.width_face_ratio",
+        "eyes.left.height_face_ratio",
+        "eyes.right.height_face_ratio",
+        "eyes.interocular_distance_ratio"
+      ],
+      "mapping_status": "partial",
+      "calibration_required": true
+    },
+    {
+      "id": "nose",
+      "name": "Nariz",
+      "game_control": "Nose",
+      "presets": ["standard", "large", "small"],
+      "axes": [
+        {
+          "id": "vertical",
+          "negative": "down",
+          "positive": "up"
+        },
+        {
+          "id": "horizontal",
+          "negative": "narrow",
+          "positive": "wide"
+        }
+      ],
+      "source_measurements": [
+        "nose.length_face_ratio",
+        "nose.width_face_ratio"
+      ],
+      "mapping_status": "partial",
+      "calibration_required": true
+    },
+    {
+      "id": "nose_profile",
+      "name": "Perfil do nariz",
+      "game_control": "Nose Profile",
+      "presets": ["standard", "crooked", "curved"],
+      "axes": [
+        {
+          "id": "horizontal",
+          "negative": "crooked",
+          "positive": "curved"
+        },
+        {
+          "id": "vertical",
+          "negative": "short",
+          "positive": "long"
+        }
+      ],
+      "source_measurements": [
+        "nose.depth_difference_relative"
+      ],
+      "mapping_status": "insufficient_data",
+      "calibration_required": true
+    },
+    {
+      "id": "nose_tip",
+      "name": "Ponta do nariz",
+      "game_control": "Nose Tip",
+      "presets": ["standard", "broken", "upturned"],
+      "axes": [
+        {
+          "id": "vertical",
+          "negative": "tip_down",
+          "positive": "tip_up"
+        },
+        {
+          "id": "horizontal",
+          "negative": "broken_left",
+          "positive": "broken_right"
+        }
+      ],
+      "source_measurements": [
+        "nose.depth_difference_relative"
+      ],
+      "mapping_status": "insufficient_data",
+      "calibration_required": true
+    },
+    {
+      "id": "cheekbones",
+      "name": "Maçãs do rosto",
+      "game_control": "Cheekbones",
+      "presets": ["standard", "large", "small"],
+      "axes": [
+        {
+          "id": "vertical",
+          "negative": "down",
+          "positive": "up"
+        },
+        {
+          "id": "horizontal",
+          "negative": "in",
+          "positive": "out"
+        }
+      ],
+      "source_measurements": [
+        "face.cheek_width_px",
+        "face.temple_width_ratio"
+      ],
+      "mapping_status": "partial",
+      "calibration_required": true
+    },
+    {
+      "id": "cheeks",
+      "name": "Bochechas",
+      "game_control": "Cheeks",
+      "presets": ["standard", "fat", "thin"],
+      "axes": [
+        {
+          "id": "volume",
+          "negative": "gaunt",
+          "positive": "puffed"
+        }
+      ],
+      "source_measurements": [
+        "face.cheek_width_px"
+      ],
+      "mapping_status": "insufficient_data",
+      "calibration_required": true
+    },
+    {
+      "id": "lips",
+      "name": "Lábios",
+      "game_control": "Lips",
+      "presets": ["standard", "large", "small"],
+      "axes": [
+        {
+          "id": "thickness",
+          "negative": "thin",
+          "positive": "fat"
+        }
+      ],
+      "source_measurements": [
+        "mouth.upper_lip_thickness_px",
+        "mouth.lower_lip_thickness_px",
+        "mouth.width_face_ratio"
+      ],
+      "mapping_status": "partial",
+      "calibration_required": true
+    },
+    {
+      "id": "jaw",
+      "name": "Mandíbula",
+      "game_control": "Jaw",
+      "presets": ["standard", "square", "round"],
+      "axes": [
+        {
+          "id": "shape",
+          "negative": "round",
+          "positive": "square"
+        },
+        {
+          "id": "width",
+          "negative": "narrow",
+          "positive": "wide"
+        }
+      ],
+      "source_measurements": [
+        "jaw.width_ratio",
+        "jaw.left_angle_degrees",
+        "jaw.right_angle_degrees"
+      ],
+      "mapping_status": "partial",
+      "calibration_required": true
+    },
+    {
+      "id": "chin_profile",
+      "name": "Perfil do queixo",
+      "game_control": "Chin Profile",
+      "presets": ["standard", "large", "small"],
+      "axes": [
+        {
+          "id": "vertical",
+          "negative": "down",
+          "positive": "up"
+        },
+        {
+          "id": "horizontal",
+          "negative": "in",
+          "positive": "out"
+        }
+      ],
+      "source_measurements": [
+        "chin.position.x",
+        "chin.position.y"
+      ],
+      "mapping_status": "insufficient_data",
+      "calibration_required": true
+    },
+    {
+      "id": "chin_shape",
+      "name": "Formato do queixo",
+      "game_control": "Chin Shape",
+      "presets": ["standard", "pointed", "round"],
+      "axes": [
+        {
+          "id": "shape",
+          "options": [
+            "rounded",
+            "bump",
+            "square",
+            "pointed"
+          ]
+        }
+      ],
+      "source_measurements": [
+        "chin.position.x",
+        "chin.position.y"
+      ],
+      "mapping_status": "insufficient_data",
+      "calibration_required": true
+    }
+  ],
+  "manual_controls": {
+    "heritage": {
+      "enabled": true,
+      "automatic_parent_selection": false,
+      "controls": [
+        "mother",
+        "father",
+        "resemblance"
+      ]
+    },
+    "appearance": {
+      "enabled": true,
+      "automatic_mapping": false,
+      "controls": [
+        "eye_color",
+        "skin_blemishes",
+        "skin_aging",
+        "skin_complexion",
+        "moles_freckles",
+        "skin_damage"
+      ]
+    }
+  },
+  "mapping_policy": {
+    "never_invent_measurements": true,
+    "allow_estimated_measurements": true,
+    "require_calibration_before_recommendation": true,
+    "preserve_unmapped_features": true
+  }
+}

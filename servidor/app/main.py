@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes.health import router as health_router
 from app.api.routes.face import router as face_router
+from app.api.routes.games import router as games_router
 
 app = FastAPI(
     title="FaceCraft API",
@@ -23,12 +24,4 @@ app.add_middleware(
 
 app.include_router(health_router)
 app.include_router(face_router)
-
-
-@app.get("/api/health", tags=["Health"])
-def health():
-    return {
-        "status": "ok",
-        "service": "FaceCraft API",
-        "engine": "MediaPipe",
-    }
+app.include_router(games_router)

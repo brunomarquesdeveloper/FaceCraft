@@ -1,24 +1,26 @@
-from fastapi import APIRouter, HTTPException
-from app.core.database import get_database_connection
+from fastapi import APIRouter
 
-router = APIRouter(prefix="/api", tags=["Health"])
+from app.services.games.catalog import get_all_games
+
+router = APIRouter(
+    prefix="/api",
+    tags=["Health"],
+)
 
 
-@router.get("/health/database")
-def database_health():
-    try:
-        with get_database_connection() as connection:
-            with connection.cursor() as cursor:
-                cursor.execute("SELECT current_database()")
-                row = cursor.fetchone()
+@router.get("/health")
+def health():
+    games = get_all_games()
 
-        return {
+    return {
+        "status": "ok",
+        "service": "FaceCraft API",
+        "engine": "MediaPipe",
+        "games": {
             "status": "ok",
-            "database": row[0],
-        }
-
-    except Exception:
-        raise HTTPException(
-            status_code=503,
-            detail="Não foi possível conectar ao banco de dados.",
-        )
+            "total": len(games),
+            "available": [
+                game["slug"] for game in games
+            ],
+        },
+    }

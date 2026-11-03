@@ -1,5 +1,6 @@
-from pydantic import AnyHttpUrl, BaseModel
+from pydantic import BaseModel, HttpUrl
 
 
 class AnalyzeFaceUrlRequest(BaseModel):
-    image_url: AnyHttpUrl
+    image_url: HttpUrl
+    game_slug: str
